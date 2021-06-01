@@ -35,13 +35,15 @@ namespace backend.Repositories
       return await _context.Teams.ToListAsync();
     }
 
-    public async Task Post(Team team)
+    public async Task<Team> Post(Team team)
     {
       _context.Teams.Add(team);
       await _context.SaveChangesAsync();
+
+      return team;
     }
 
-    public async Task Update(Team team)
+    public async Task<Team> Update(Team team)
     {
       var itemToUpdate = await _context.Teams.FindAsync(team.Id);
       if (itemToUpdate == null)
@@ -49,6 +51,8 @@ namespace backend.Repositories
 
       itemToUpdate.Name = team.Name;
       await _context.SaveChangesAsync();
+
+      return team;
     }
   }
 }

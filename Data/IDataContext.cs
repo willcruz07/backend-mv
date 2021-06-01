@@ -8,6 +8,7 @@ namespace backend.Data
   public interface IDataContext
   {
     DbSet<Team> Teams { get; set; }
+    DbSet<Player> Players { get; set; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
   }
 }

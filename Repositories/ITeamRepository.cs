@@ -8,8 +8,8 @@ namespace backend.Repositories
   {
     Task<Team> Get(int id);
     Task<IEnumerable<Team>> GetAll();
-    Task Post(Team team);
-    Task Update(Team team);
+    Task<Team> Post(Team team);
+    Task<Team> Update(Team team);
     Task Delete(int id);
   }
 }

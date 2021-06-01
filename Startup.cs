@@ -33,6 +33,7 @@ namespace backend
       services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
       services.AddScoped<IDataContext>(provider => provider.GetService<DataContext>());
       services.AddScoped<ITeamRepository, TeamRepository>();
+      services.AddScoped<IPlayerRepository, PlayerRepository>();
       services.AddControllers();
       services.AddSwaggerGen(c =>
       {
