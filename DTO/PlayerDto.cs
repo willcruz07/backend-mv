@@ -1,4 +1,4 @@
-using backend.Domain.Models;
+using backend.Models;
 
 namespace backend.DTO
 {

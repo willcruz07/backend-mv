@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using backend.Domain.Models;
+using backend.Models;
 
 namespace backend.Repositories
 {
   public interface ITeamRepository
   {
-    Task<Team> Get(int id);
-    Task<List<Team>> GetAll();
-    Task<Team> Post(Team team);
-    Task<Team> Update(Team team);
-    Task Delete(int id);
+    Team Get(int id);
+    List<Team> GetAll();
+    Team Post(Team team);
+    Team Update(Team team);
+    void Delete(int id);
   }
 }

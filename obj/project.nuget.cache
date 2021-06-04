@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "y3ADs40nlWI7An0S4SWxX0Pt2K22ejR9H3UFn1qc1i0CTnYiBlH7XFeSYzLf4OcLMn8Ww6UBFW9TPBm3Kn2vog==",
+  "dgSpecHash": "UFlgY9zT4IIL0Cpk2uwLuuMRH2aoCDpqqj25/hjq6bf4YhEaXZqoKkC0BcLd82tNyuOoOefEHNw4teXGV/Ua3g==",
   "success": true,
   "projectFilePath": "D:\\Programacao\\Projetos\\MV\\champion\\backend\\backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lynka\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\lynka\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\5.0.6\\microsoft.aspnetcore.jsonpatch.5.0.6.nupkg.sha512",
+    "C:\\Users\\lynka\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\5.0.6\\microsoft.aspnetcore.mvc.newtonsoftjson.5.0.6.nupkg.sha512",
+    "C:\\Users\\lynka\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\lynka\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.0-preview.4.21253.1\\microsoft.entityframeworkcore.6.0.0-preview.4.21253.1.nupkg.sha512",
     "C:\\Users\\lynka\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.0-preview.4.21253.1\\microsoft.entityframeworkcore.abstractions.6.0.0-preview.4.21253.1.nupkg.sha512",
     "C:\\Users\\lynka\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\6.0.0-preview.4.21253.1\\microsoft.entityframeworkcore.analyzers.6.0.0-preview.4.21253.1.nupkg.sha512",
@@ -21,6 +24,8 @@
     "C:\\Users\\lynka\\.nuget\\packages\\microsoft.extensions.options\\6.0.0-preview.4.21253.7\\microsoft.extensions.options.6.0.0-preview.4.21253.7.nupkg.sha512",
     "C:\\Users\\lynka\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0-preview.4.21253.7\\microsoft.extensions.primitives.6.0.0-preview.4.21253.7.nupkg.sha512",
     "C:\\Users\\lynka\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\lynka\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\lynka\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "C:\\Users\\lynka\\.nuget\\packages\\npgsql\\6.0.0-preview4\\npgsql.6.0.0-preview4.nupkg.sha512",
     "C:\\Users\\lynka\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\6.0.0-preview4\\npgsql.entityframeworkcore.postgresql.6.0.0-preview4.nupkg.sha512",
     "C:\\Users\\lynka\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",

@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using backend.Domain.Models;
+using backend.Models;
 using backend.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using backend.DTO;
@@ -20,9 +18,9 @@ namespace backend.Controllers
 
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Team>> GetTeam(int id)
+    public IActionResult Get(int id)
     {
-      var team = await _teamRepository.Get(id);
+      var team = _teamRepository.Get(id);
       if (team == null)
         return NotFound();
 
@@ -30,40 +28,41 @@ namespace backend.Controllers
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Team>>> GetTeams()
+    public IActionResult Get()
     {
-      var teams = await _teamRepository.GetAll();
-      return Ok(teams);
+      return Ok(_teamRepository.GetAll());
     }
 
     [HttpPost]
-    public async Task<ActionResult> PostTeam(TeamDto teamDTO)
+    public IActionResult Post([FromBody] TeamDto teamDTO)
     {
+      if (teamDTO == null)
+        return BadRequest();
+
       var team = new Team
       {
         Name = teamDTO.Name,
       };
 
-      var _team = await _teamRepository.Post(team);
-      return Ok(_team);
+      return Ok(_teamRepository.Post(team));
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult> UpdateTeam(int id, TeamDto teamDTO)
+    public IActionResult UpdateTeam(int id, TeamDto teamDTO)
     {
       Team team = new()
       {
         Name = teamDTO.Name,
       };
-      await _teamRepository.Update(team);
-      return Ok();
+
+      return Ok(_teamRepository.Update(team));
     }
 
     [HttpDelete("{id}")]
-    public async Task<ActionResult> DeleteTeam(int id)
+    public IActionResult Delete(int id)
     {
-      await _teamRepository.Delete(id);
-      return Ok();
+      _teamRepository.Delete(id);
+      return NoContent();
     }
 
   }

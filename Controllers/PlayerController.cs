@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using backend.DTO;
-using backend.Domain.Models;
+using backend.Models;
 using backend.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,9 +19,9 @@ namespace backend.Controllers
     }
 
     [HttpGet]
-    public async Task<ActionResult<Player>> Get(int id)
+    public IActionResult Get(int id)
     {
-      var player = await _playerRepository.Get(id);
+      var player = _playerRepository.Get(id);
       if (player == null)
         return NotFound();
 
@@ -29,15 +29,13 @@ namespace backend.Controllers
     }
 
     [HttpGet("{id}")]
-
-    public async Task<ActionResult<IEnumerable<Player>>> GetAll()
+    public IActionResult GetAll()
     {
-      var player = await _playerRepository.GetAll();
-      return Ok(player);
+      return Ok(_playerRepository.GetAll());
     }
 
     [HttpPost]
-    public async Task<ActionResult> Post(PlayerDto playerDTO)
+    public IActionResult Post(PlayerDto playerDTO)
     {
       var player = new Player
       {
@@ -45,27 +43,26 @@ namespace backend.Controllers
         TeamId = playerDTO.TeamId
       };
 
-      var _player = await _playerRepository.Post(player);
-      return Ok(_player);
+      return Ok(_playerRepository.Post(player));
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult> Update(int id, PlayerDto playerDTO)
+    public IActionResult Update(int id, PlayerDto playerDTO)
     {
       Player player = new()
       {
         Name = playerDTO.Name,
         TeamId = playerDTO.TeamId,
       };
-      var _player = await _playerRepository.Update(player);
-      return Ok(_player);
+
+      return Ok(_playerRepository.Update(player));
     }
 
     [HttpDelete("{id}")]
-    public async Task<ActionResult> DeleteTeam(int id)
+    public IActionResult DeleteTeam(int id)
     {
-      await _playerRepository.Delete(id);
-      return Ok();
+      _playerRepository.Delete(id);
+      return NoContent();
     }
 
 

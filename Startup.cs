@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using backend.Data;
 using backend.Repositories;
 
@@ -31,6 +32,7 @@ namespace backend
     {
 
       services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+      services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
       // services.AddScoped<IDataContext>(provider => provider.GetService<DataContext>());      
       services.AddScoped<ITeamRepository, TeamRepository>();
       services.AddScoped<IPlayerRepository, PlayerRepository>();

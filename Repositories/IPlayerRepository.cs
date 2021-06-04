@@ -1,15 +1,14 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using backend.Domain.Models;
+using backend.Models;
 
 namespace backend.Repositories
 {
   public interface IPlayerRepository
   {
-    Task<Player> Get(int id);
-    Task<IEnumerable<Player>> GetAll();
-    Task<Player> Post(Player player);
-    Task<Player> Update(Player player);
-    Task Delete(int id);
+    Player Get(int id);
+    List<Player> GetAll();
+    Player Post(Player player);
+    Player Update(Player player);
+    void Delete(int id);
   }
 }

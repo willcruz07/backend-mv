@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Linq;
 using backend.Data;
-using backend.Domain.Models;
+using backend.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Repositories
@@ -14,44 +14,43 @@ namespace backend.Repositories
     {
       _context = context;
     }
-    public async Task Delete(int id)
+    public void Delete(int id)
     {
-      var itemToDelete = await _context.Teams.FindAsync(id);
+      var itemToDelete = _context.Teams.SingleOrDefault(t => t.Id.Equals(id));
 
       if (itemToDelete == null)
         throw new NullReferenceException();
 
       _context.Teams.Remove(itemToDelete);
-      await _context.SaveChangesAsync();
+      _context.SaveChanges();
     }
 
-    public async Task<Team> Get(int id)
+    public Team Get(int id)
     {
-      return await _context.Teams.SingleAsync(t => t.Id == id);
+      return _context.Teams.SingleOrDefault(t => t.Id.Equals(id));
     }
 
-    public async Task<List<Team>> GetAll()
+    public List<Team> GetAll()
     {
-      var teams = await _context.Teams.ToListAsync();
-      return teams;
+      return _context.Teams.Include(p => p.Players).ToList();
     }
 
-    public async Task<Team> Post(Team team)
+    public Team Post(Team team)
     {
       _context.Teams.Add(team);
-      await _context.SaveChangesAsync();
+      _context.SaveChanges();
 
       return team;
     }
 
-    public async Task<Team> Update(Team team)
+    public Team Update(Team team)
     {
-      var itemToUpdate = await _context.Teams.FindAsync(team.Id);
+      var itemToUpdate = _context.Teams.SingleOrDefault(t => t.Id.Equals(team.Id));
       if (itemToUpdate == null)
         throw new NullReferenceException();
 
       itemToUpdate.Name = team.Name;
-      await _context.SaveChangesAsync();
+      _context.SaveChanges();
 
       return team;
     }

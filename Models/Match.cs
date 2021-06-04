@@ -1,4 +1,4 @@
-namespace backend.Domain.Models
+namespace backend.Models
 {
   public class Match
   {

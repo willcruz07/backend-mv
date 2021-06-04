@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using backend.Data;
-using backend.Domain.Models;
+using backend.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Repositories
@@ -16,43 +17,44 @@ namespace backend.Repositories
       _context = context;
     }
 
-    public async Task Delete(int id)
+    public void Delete(int id)
     {
-      var itemToDelete = await _context.Players.FindAsync(id);
+      var itemToDelete = _context.Players.SingleOrDefault(p => p.Id.Equals(id));
       if (itemToDelete == null)
         throw new NullReferenceException();
 
       _context.Players.Remove(itemToDelete);
-      await _context.SaveChangesAsync();
+      _context.SaveChanges();
     }
 
-    public async Task<Player> Get(int id)
+    public Player Get(int id)
     {
-      return await _context.Players.FindAsync(id);
+      return _context.Players.SingleOrDefault(p => p.Id.Equals(id));
     }
 
-    public async Task<IEnumerable<Player>> GetAll()
+    public List<Player> GetAll()
     {
-      return await _context.Players.ToListAsync();
+      return _context.Players.ToList();
     }
 
-    public async Task<Player> Post(Player player)
+    public Player Post(Player player)
     {
       _context.Players.Add(player);
-      await _context.SaveChangesAsync();
+      _context.SaveChanges();
 
       return player;
     }
 
-    public async Task<Player> Update(Player player)
+    public Player Update(Player player)
     {
-      var itemToUpdate = await _context.Players.FindAsync(player);
+      var itemToUpdate = _context.Players.SingleOrDefault(p => p.Id.Equals(player.Id));
       if (itemToUpdate == null)
         throw new NullReferenceException();
 
       itemToUpdate.Name = player.Name;
       itemToUpdate.Team = player.Team;
-      await _context.SaveChangesAsync();
+
+      _context.SaveChanges();
 
       return player;
     }

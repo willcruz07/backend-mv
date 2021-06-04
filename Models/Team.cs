@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace backend.Domain.Models
+namespace backend.Models
 {
   public class Team
   {
