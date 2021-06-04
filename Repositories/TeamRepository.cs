@@ -2,15 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using backend.Data;
-using backend.Models;
+using backend.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Repositories
 {
   public class TeamRepository : ITeamRepository
   {
-    private readonly IDataContext _context;
-    public TeamRepository(IDataContext context)
+    private readonly DataContext _context;
+    public TeamRepository(DataContext context)
     {
       _context = context;
     }
@@ -27,12 +27,13 @@ namespace backend.Repositories
 
     public async Task<Team> Get(int id)
     {
-      return await _context.Teams.FindAsync(id);
+      return await _context.Teams.SingleAsync(t => t.Id == id);
     }
 
-    public async Task<IEnumerable<Team>> GetAll()
+    public async Task<List<Team>> GetAll()
     {
-      return await _context.Teams.ToListAsync();
+      var teams = await _context.Teams.ToListAsync();
+      return teams;
     }
 
     public async Task<Team> Post(Team team)

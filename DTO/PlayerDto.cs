@@ -1,11 +1,11 @@
-using backend.Models;
+using backend.Domain.Models;
 
 namespace backend.DTO
 {
   public class PlayerDto
   {
     public string Name { get; set; }
-    public Team Team { get; set; }
+    public int TeamId { get; set; }
 
   }
 }

@@ -10,8 +10,8 @@ using backend.Data;
 namespace backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210531203657_initialCreate")]
-    partial class initialCreate
+    [Migration("20210604011706_initialCreate2")]
+    partial class initialCreate2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace backend.Migrations
                 .HasAnnotation("ProductVersion", "6.0.0-preview.4.21253.1")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            modelBuilder.Entity("backend.Models.Competition", b =>
+            modelBuilder.Entity("backend.Domain.Models.Competition", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -36,7 +36,7 @@ namespace backend.Migrations
                     b.ToTable("Competitions");
                 });
 
-            modelBuilder.Entity("backend.Models.Match", b =>
+            modelBuilder.Entity("backend.Domain.Models.Match", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -46,16 +46,16 @@ namespace backend.Migrations
                     b.Property<int?>("CompetitionId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ScoreHouve")
+                    b.Property<int>("ScoreHouse")
                         .HasColumnType("integer");
 
                     b.Property<int>("ScoreVisitor")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("TeamHouseId")
+                    b.Property<int>("TeamHouseId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("TeamVisitorId")
+                    b.Property<int>("TeamVisitorId")
                         .HasColumnType("integer");
 
                     b.HasKey("id");
@@ -69,15 +69,17 @@ namespace backend.Migrations
                     b.ToTable("Matches");
                 });
 
-            modelBuilder.Entity("backend.Models.Player", b =>
+            modelBuilder.Entity("backend.Domain.Models.Player", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<int?>("TeamId")
+                    b.Property<int>("TeamId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -87,7 +89,7 @@ namespace backend.Migrations
                     b.ToTable("Players");
                 });
 
-            modelBuilder.Entity("backend.Models.Team", b =>
+            modelBuilder.Entity("backend.Domain.Models.Team", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -102,19 +104,23 @@ namespace backend.Migrations
                     b.ToTable("Teams");
                 });
 
-            modelBuilder.Entity("backend.Models.Match", b =>
+            modelBuilder.Entity("backend.Domain.Models.Match", b =>
                 {
-                    b.HasOne("backend.Models.Competition", "Competition")
+                    b.HasOne("backend.Domain.Models.Competition", "Competition")
                         .WithMany()
                         .HasForeignKey("CompetitionId");
 
-                    b.HasOne("backend.Models.Team", "TeamHouse")
+                    b.HasOne("backend.Domain.Models.Team", "TeamHouse")
                         .WithMany()
-                        .HasForeignKey("TeamHouseId");
+                        .HasForeignKey("TeamHouseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("backend.Models.Team", "TeamVisitor")
+                    b.HasOne("backend.Domain.Models.Team", "TeamVisitor")
                         .WithMany()
-                        .HasForeignKey("TeamVisitorId");
+                        .HasForeignKey("TeamVisitorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Competition");
 
@@ -123,13 +129,20 @@ namespace backend.Migrations
                     b.Navigation("TeamVisitor");
                 });
 
-            modelBuilder.Entity("backend.Models.Player", b =>
+            modelBuilder.Entity("backend.Domain.Models.Player", b =>
                 {
-                    b.HasOne("backend.Models.Team", "Team")
-                        .WithMany()
-                        .HasForeignKey("TeamId");
+                    b.HasOne("backend.Domain.Models.Team", "Team")
+                        .WithMany("Players")
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("backend.Domain.Models.Team", b =>
+                {
+                    b.Navigation("Players");
                 });
 #pragma warning restore 612, 618
         }

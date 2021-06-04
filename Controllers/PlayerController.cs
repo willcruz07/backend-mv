@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using backend.DTO;
-using backend.Models;
+using backend.Domain.Models;
 using backend.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,7 +42,7 @@ namespace backend.Controllers
       var player = new Player
       {
         Name = playerDTO.Name,
-        Team = playerDTO.Team
+        TeamId = playerDTO.TeamId
       };
 
       var _player = await _playerRepository.Post(player);
@@ -55,7 +55,7 @@ namespace backend.Controllers
       Player player = new()
       {
         Name = playerDTO.Name,
-        Team = playerDTO.Team,
+        TeamId = playerDTO.TeamId,
       };
       var _player = await _playerRepository.Update(player);
       return Ok(_player);

@@ -2,16 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using backend.Data;
-using backend.Models;
+using backend.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Repositories
 {
   public class PlayerRepository : IPlayerRepository
   {
-    private readonly IDataContext _context;
+    private readonly DataContext _context;
 
-    public PlayerRepository(IDataContext context)
+    public PlayerRepository(DataContext context)
     {
       _context = context;
     }

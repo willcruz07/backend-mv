@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using backend.Models;
+using backend.Domain.Models;
 using backend.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using backend.DTO;
@@ -30,7 +30,7 @@ namespace backend.Controllers
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Team>>> GetTeams()
+    public async Task<ActionResult<List<Team>>> GetTeams()
     {
       var teams = await _teamRepository.GetAll();
       return Ok(teams);
